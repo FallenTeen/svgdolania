@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowLeft, MapPin, Users } from 'lucide-react'
 import { notFound } from 'next/navigation'
-import { getTripRequestById } from '../../actions'
+import { getTripRequestById } from './actions'
 import { TripRequestApprovalForm } from '@/components/admin/TripRequestApprovalForm'
 
 export default async function ApproveTripRequestPage({ params }: { params: Promise<{ id: string }> }) {
