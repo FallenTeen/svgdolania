@@ -12,7 +12,7 @@ const magicLinkSchema = z.object({
 
 type MagicLinkFormValues = z.infer<typeof magicLinkSchema>
 
-export function MagicLinkForm() {
+export function MagicLinkForm({ redirectTo }: { redirectTo?: string }) {
   const [sent, setSent] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -31,10 +31,13 @@ export function MagicLinkForm() {
 
     const supabase = createClient()
 
+    const callbackUrl = new URL('/auth/callback', window.location.origin)
+    if (redirectTo) callbackUrl.searchParams.set('next', redirectTo)
+
     const { error } = await supabase.auth.signInWithOtp({
       email: values.email,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: callbackUrl.toString(),
       },
     })
 
