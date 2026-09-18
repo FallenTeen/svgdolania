@@ -14,6 +14,9 @@
 --   sebagai variasi tampilan UI (badge Member/Guest), belum diikat ke user
 --   asli. Kalau nanti perlu user asli untuk testing login, buat lewat
 --   Supabase Studio (Authentication > Add user) lalu update baris ini.
+-- - cover_image_url & gallery untuk curugs sudah memakai URL asli
+--   (sumber: curugs_rows.csv). Artikel & trip masih placeholder karena
+--   belum ada data gambar asli untuk keduanya.
 -- =====================================================================
 
 with new_curugs as (
@@ -37,8 +40,8 @@ with new_curugs as (
     '["toilet","warung","mushola","gazebo","area_camping","tempat_parkir_luas"]'::jsonb,
     'Jalan aspal mulus sampai area parkir, dilanjutkan jalan setapak berundak ±15-20 menit. Aman untuk anak-anak dengan pengawasan.',
     '["pemula","keluarga","hobi_foto","dekat_kota","camping"]'::jsonb,
-    'https://images.example.com/curug-cipendok/cover.jpg',
-    '["https://images.example.com/curug-cipendok/1.jpg","https://images.example.com/curug-cipendok/2.jpg","https://images.example.com/curug-cipendok/3.jpg"]'::jsonb,
+    'https://static.banyumaskab.go.id/website/images/website_25072312020064bf57483912f.jpg',
+    '["https://static.banyumaskab.go.id/website/images/website_25072312020064bf57483912f.jpg","https://static.banyumaskab.go.id/website/documents/cilongokkec/IMG-20230613-WA0002.jpg","https://static.banyumaskab.go.id/website/documents/cilongokkec/Curug-Cipendok.jpg"]'::jsonb,
     true
   ),
   (
@@ -52,8 +55,8 @@ with new_curugs as (
     '["toilet","warung","area_parkir_motor"]'::jsonb,
     'Sebagian jalan setapak menyusuri tebing sungai, ada beberapa titik licin saat basah. Disarankan pakai sandal gunung/sepatu trekking.',
     '["adventure","hobi_foto","air_terjun_tersembunyi","cocok_camping_singkat"]'::jsonb,
-    'https://images.example.com/curug-gomblang/cover.jpg',
-    '["https://images.example.com/curug-gomblang/1.jpg","https://images.example.com/curug-gomblang/2.jpg"]'::jsonb,
+    'https://dolanbanyumas.banyumaskab.go.id/assets/gambar_objek/curug-gomblang.jpg',
+    '["https://dolanbanyumas.banyumaskab.go.id/assets/gambar_objek/curug-gomblang.jpg","https://backpackerjakarta.com/wp-content/uploads/2016/07/Curug-Gomblang.jpg"]'::jsonb,
     true
   ),
   (
@@ -67,8 +70,8 @@ with new_curugs as (
     '["toilet","warung","mushola","gazebo","tempat_parkir_luas"]'::jsonb,
     'Akses jalan sudah dicor/paving, jarak dari parkir ke lokasi curug sangat dekat dan landai.',
     '["pemula","keluarga","dekat_kota","budget_ramah"]'::jsonb,
-    'https://images.example.com/curug-bayan/cover.jpg',
-    '["https://images.example.com/curug-bayan/1.jpg","https://images.example.com/curug-bayan/2.jpg","https://images.example.com/curug-bayan/3.jpg"]'::jsonb,
+    'https://dolanbanyumas.banyumaskab.go.id/assets/gambar_objek/curug-bayan.png',
+    '["https://visitcentraljava.com/wp-content/uploads/2024/11/image-23.png","https://kawanonline.co.id/wp-content/uploads/2025/01/Yuk-Nikmati-Keindahan-Curug-Bayan-di-Baturaden-kawanonline.co_.id_.png"]'::jsonb,
     true
   ),
   (
@@ -82,8 +85,8 @@ with new_curugs as (
     '["warung_musiman","area_parkir_motor"]'::jsonb,
     'Trek didominasi jalan tanah dan menyeberang sungai kecil 2-3 kali, tidak disarankan setelah hujan deras. Wajib pemandu lokal untuk rombongan baru.',
     '["adventure","pecinta_alam","trek_panjang","jarang_ramai"]'::jsonb,
-    'https://images.example.com/curug-jenggala/cover.jpg',
-    '["https://images.example.com/curug-jenggala/1.jpg","https://images.example.com/curug-jenggala/2.jpg"]'::jsonb,
+    'https://dolanbanyumas.banyumaskab.go.id/assets/gambar_objek/curug-jenggala.png',
+    '["https://visitcentraljava.com/wp-content/uploads/2024/03/image-32.png","https://muncak.id/storage/4fd47f62-ac7d-4a7b-9348-6d9ebf7f5628/rute-gallery-67933f78b3de435.png"]'::jsonb,
     true
   ),
   (
@@ -97,8 +100,8 @@ with new_curugs as (
     '["toilet","warung_musiman"]'::jsonb,
     'Jalur berupa jalan setapak dengan beberapa anak tangga tanah, cukup menantang untuk pemula tapi tetap aman dengan sepatu yang sesuai.',
     '["hobi_foto","adventure","hidden_gem","instagramable"]'::jsonb,
-    'https://images.example.com/curug-ceheng/cover.jpg',
-    '["https://images.example.com/curug-ceheng/1.jpg","https://images.example.com/curug-ceheng/2.jpg","https://images.example.com/curug-ceheng/3.jpg"]'::jsonb,
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScp6xqxrcGyJYOGj_j_cRfmAxxGFS4ozWy5v_03slRqXEv0rUlTf8i0ik&s=10',
+    '["https://assets.pikiran-rakyat.com/crop/17x453:701x923/1200x675/webp/photo/2021/11/02/2303790150.jpg","https://visitcentraljava.com/wp-content/uploads/2021/12/CURUG-CEHENG-2.jpg"]'::jsonb,
     true
   ),
   (
@@ -112,8 +115,8 @@ with new_curugs as (
     '["toilet","warung","mushola","gazebo"]'::jsonb,
     'Jalan menuju lokasi sudah beraspal, hanya perlu jalan kaki singkat dari area parkir menuju spot foto utama.',
     '["pemula","keluarga","hobi_foto","dekat_kota","ikonik"]'::jsonb,
-    'https://images.example.com/curug-pengantin/cover.jpg',
-    '["https://images.example.com/curug-pengantin/1.jpg","https://images.example.com/curug-pengantin/2.jpg"]'::jsonb,
+    'https://ik.imagekit.io/tvlk/dam/i/01k21dfty3365deet450z0hv5t.png',
+    '["https://ik.imagekit.io/tvlk/dam/i/01k21dfty3365deet450z0hv5t.png","https://radartegal.disway.id/upload/7c799f5a7e953dc38bcc998fa16e9dd4.png"]'::jsonb,
     true
   )
   returning id, slug
