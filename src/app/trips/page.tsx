@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Compass } from 'lucide-react'
-import { getTrips } from '@/app/admin/trips/actions'
+import { getTrips } from '@/app/trips/actions'
 import { TripCard } from '@/components/trip/TripCard'
 
 export const metadata: Metadata = {

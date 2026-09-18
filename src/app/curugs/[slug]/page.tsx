@@ -11,7 +11,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { getCurugBySlug, getCurugs } from '@/app/admin/curugs/actions'
-import { getTrips } from '@/app/admin/trips/actions'
+import { getTrips } from '@/app/trips/actions'
 import { DifficultyBadge, TagChip } from '@/components/ui/Badge'
 import { ButtonLink } from '@/components/ui/Button'
 import { Gallery } from '@/components/curug/Gallery'

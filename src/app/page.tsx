@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Compass, MapPin } from 'lucide-react'
 import { getCurugs } from '@/app/admin/curugs/actions'
-import { getTrips } from '@/app/admin/trips/actions'
+import { getTrips } from '@/app/trips/actions'
 import { getArticles } from '@/app/artikel/actions'
 import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { CurugCard } from '@/components/curug/CurugCard'
