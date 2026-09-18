@@ -209,14 +209,14 @@ function RowActions({ participant }: { participant: Participant }) {
     return (
       <div className="flex items-center gap-2">
         <ConfirmButton
-          onConfirm={() => approveParticipant(participant.id)}
+          onConfirm={approveParticipant.bind(null, participant.id)}
           confirmMessage={`Setujui booking dari ${participant.contact_name}?`}
           className="inline-flex items-center gap-1 rounded-lg bg-emerald-600 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-emerald-700"
         >
           <Check size={13} /> Setujui
         </ConfirmButton>
         <ConfirmButton
-          onConfirm={() => rejectParticipant(participant.id)}
+          onConfirm={rejectParticipant.bind(null, participant.id)}
           confirmMessage={`Tolak booking dari ${participant.contact_name}?`}
           className="inline-flex items-center gap-1 rounded-lg bg-white px-2.5 py-1.5 text-xs font-medium text-red-600 ring-1 ring-inset ring-red-200 hover:bg-red-50"
         >
@@ -229,7 +229,7 @@ function RowActions({ participant }: { participant: Participant }) {
   if (participant.status === 'waitlist') {
     return (
       <ConfirmButton
-        onConfirm={() => promoteFromWaitlist(participant.id)}
+        onConfirm={promoteFromWaitlist.bind(null, participant.id)}
         confirmMessage={`Naikkan ${participant.contact_name} dari waiting list ke pending?`}
         className="inline-flex items-center gap-1 rounded-lg bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-200 hover:bg-gray-50"
       >
