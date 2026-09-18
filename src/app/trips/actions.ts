@@ -153,7 +153,7 @@ export async function createTrip(formData: FormData): Promise<ActionResult<Trip>
     return { success: true, data: trip as Trip }
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors.map((e) => e.message).join(', ') }
+      return { success: false, error: err.issues.map((e) => e.message).join(', ') }
     }
     return { success: false, error: err instanceof Error ? err.message : 'Gagal membuat trip' }
   }
@@ -200,7 +200,7 @@ export async function updateTrip(id: string, formData: FormData): Promise<Action
     return { success: true, data: trip as Trip }
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors.map((e) => e.message).join(', ') }
+      return { success: false, error: err.issues.map((e) => e.message).join(', ') }
     }
     return { success: false, error: err instanceof Error ? err.message : 'Gagal memperbarui trip' }
   }

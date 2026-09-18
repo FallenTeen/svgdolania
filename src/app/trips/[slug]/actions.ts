@@ -116,7 +116,7 @@ export async function submitBooking(
     }
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors.map((e) => e.message).join(', ') }
+      return { success: false, error: err.issues.map((e) => e.message).join(', ') }
     }
     return { success: false, error: err instanceof Error ? err.message : 'Gagal mengirim booking' }
   }

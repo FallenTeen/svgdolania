@@ -98,7 +98,7 @@ export async function createArticle(formData: FormData): Promise<ActionResult<Ar
     return { success: true, data: data as Article }
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors.map((e) => e.message).join(', ') }
+      return { success: false, error: err.issues.map((e) => e.message).join(', ') }
     }
     return { success: false, error: err instanceof Error ? err.message : 'Gagal membuat artikel' }
   }
@@ -150,7 +150,7 @@ export async function updateArticle(id: string, formData: FormData): Promise<Act
     return { success: true, data: data as Article }
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors.map((e) => e.message).join(', ') }
+      return { success: false, error: err.issues.map((e) => e.message).join(', ') }
     }
     return { success: false, error: err instanceof Error ? err.message : 'Gagal memperbarui artikel' }
   }

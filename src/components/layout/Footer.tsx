@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Instagram, Music2, Droplets, MessageCircle } from 'lucide-react'
+import { Music2, Droplets, MessageCircle } from 'lucide-react'
+import { FaInstagram } from 'react-icons/fa'
 
 const ADMIN_WHATSAPP = process.env.NEXT_PUBLIC_ADMIN_WHATSAPP_NUMBER
 
@@ -44,7 +45,7 @@ export function Footer() {
                 aria-label="Instagram"
                 className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/30 transition-colors hover:border-[var(--color-sun)] hover:text-[var(--color-sun)]"
               >
-                <Instagram size={18} />
+                <FaInstagram size={18} />
               </a>
               <a
                 href="https://tiktok.com/"

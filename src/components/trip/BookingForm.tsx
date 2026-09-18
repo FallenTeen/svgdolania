@@ -18,13 +18,14 @@ const bookingSchema = z.object({
   member_names: z.array(z.object({ name: z.string().min(1, 'Nama peserta wajib diisi') })),
   notes: z.string().optional(),
 })
-
-type BookingFormValues = z.infer<typeof bookingSchema>
+type BookingFormInput = z.input<typeof bookingSchema>
+type BookingFormValues = z.output<typeof bookingSchema>
 
 type SubmitState =
   | { status: 'idle' }
   | { status: 'success'; participantStatus: string; whatsappLink: string }
   | { status: 'error'; message: string }
+
 
 export function BookingForm({ trip }: { trip: TripWithCurugs }) {
   const isFull = trip.status === 'full' || trip.remaining_slots <= 0
@@ -33,24 +34,24 @@ export function BookingForm({ trip }: { trip: TripWithCurugs }) {
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm<BookingFormValues>({
-    resolver: zodResolver(bookingSchema),
-    defaultValues: {
-      contact_name: '',
-      contact_phone: '',
-      contact_email: '',
-      total_people: 1,
-      member_names: [{ name: '' }],
-      notes: '',
-    },
-  })
+const {
+  register,
+  control,
+  handleSubmit,
+  watch,
+  setValue,
+  formState: { errors },
+} = useForm<BookingFormInput, unknown, BookingFormValues>({
+  resolver: zodResolver(bookingSchema),
+  defaultValues: {
+    contact_name: '',
+    contact_phone: '',
+    contact_email: '',
+    total_people: 1,
+    member_names: [{ name: '' }],
+    notes: '',
+  },
+})
 
   const { fields, append, remove } = useFieldArray({ control, name: 'member_names' })
   const totalPeople = watch('total_people')

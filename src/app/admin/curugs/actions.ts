@@ -123,7 +123,7 @@ export async function createCurug(formData: FormData): Promise<ActionResult<Curu
     return { success: true, data: data as Curug }
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors.map((e) => e.message).join(', ') }
+      return { success: false, error: err.issues.map((e) => e.message).join(', ') }
     }
     return { success: false, error: err instanceof Error ? err.message : 'Gagal membuat curug' }
   }
@@ -160,7 +160,7 @@ export async function updateCurug(id: string, formData: FormData): Promise<Actio
     return { success: true, data: data as Curug }
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors.map((e) => e.message).join(', ') }
+      return { success: false, error: err.issues.map((e) => e.message).join(', ') }
     }
     return { success: false, error: err instanceof Error ? err.message : 'Gagal memperbarui curug' }
   }
