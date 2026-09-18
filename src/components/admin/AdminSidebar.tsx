@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   MapPin,
   CalendarDays,
+  ClipboardList,
   Users,
   Newspaper,
   LogOut,
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
   { href: '/admin/curugs', label: 'Curug', icon: MapPin },
   { href: '/admin/trips', label: 'Trip & Availability', icon: CalendarDays },
+  { href: '/admin/trip-requests', label: 'Request Trip', icon: ClipboardList },
   { href: '/admin/peserta', label: 'Peserta', icon: Users },
   { href: '/admin/artikel', label: 'Artikel', icon: Newspaper },
 ]

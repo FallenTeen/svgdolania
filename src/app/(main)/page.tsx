@@ -22,6 +22,7 @@ import { ArticleCard } from '@/components/artikel/ArticleCard'
 import { ButtonLink } from '@/components/ui/Button'
 import { SectionHeading, WaveDivider } from '@/components/ui/WaveDivider'
 import { normalizePhoneNumber } from '@/lib/whatsapp'
+import { TripRequestCalendar } from '@/components/trip/TripRequestCalendar'
 
 export const metadata: Metadata = {
   title: 'Explore Curug Banyumas — Katalog & Trip Air Terjun Banyumas',
@@ -78,7 +79,13 @@ function buildWaLink(): string | null {
   return `https://wa.me/${normalizePhoneNumber(adminNumber)}?text=${encodeURIComponent(message)}`
 }
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ requestDate?: string }>
+}) {
+  const { requestDate } = await searchParams
+
   const [curugsResult, tripsResult, articlesResult] = await Promise.all([
     getCurugs(),
     getTrips({ status: 'open', type: 'public' }),
@@ -260,6 +267,9 @@ export default async function HomePage() {
           )}
         </div>
       </section>
+
+      {/* Request tanggal trip */}
+      <TripRequestCalendar curugs={publishedCurugs} initialDate={requestDate} />
 
       <WaveDivider color="var(--color-bg)" flip />
 

@@ -3,6 +3,7 @@ export type TripType = 'public' | 'private'
 export type TripStatus = 'open' | 'full' | 'closed' | 'cancelled'
 export type ParticipantStatus = 'pending' | 'approved' | 'rejected' | 'waitlist'
 export type UserRole = 'admin' | 'participant'
+export type TripRequestStatus = 'pending' | 'approved' | 'rejected'
 
 export interface Curug {
   id: string
@@ -111,4 +112,26 @@ export interface ActionResult<T = undefined> {
   success: boolean
   error?: string
   data?: T
+}
+
+
+export interface TripRequest {
+  id: string
+  user_id: string | null
+  contact_name: string
+  contact_phone: string
+  contact_email: string | null
+  trip_date: string
+  total_people: number
+  member_names: string[]
+  notes: string | null
+  status: TripRequestStatus
+  admin_notes: string | null
+  approved_trip_id: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface TripRequestWithCurugs extends TripRequest {
+  curugs: Pick<Curug, 'id' | 'name' | 'slug'>[]
 }
