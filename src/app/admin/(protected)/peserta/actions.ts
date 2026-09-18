@@ -60,3 +60,15 @@ export async function getTripsLite(): Promise<
     return { success: false, error: err instanceof Error ? err.message : 'Gagal mengambil data trip' }
   }
 }
+/** Detail 1 trip (kolom lengkap) untuk halaman detail peserta per-trip. */
+export async function getTripById(id: string): Promise<ActionResult<Trip>> {
+  try {
+    const supabase = createServiceClient()
+    const { data, error } = await supabase.from('trips').select('*').eq('id', id).single()
+
+    if (error) throw error
+    return { success: true, data: data as Trip }
+  } catch (err) {
+    return { success: false, error: err instanceof Error ? err.message : 'Trip tidak ditemukan' }
+  }
+}
