@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, Droplets } from 'lucide-react'
 
 const LINKS = [
+  { href: '/', label: 'Home' },
   { href: '/curugs', label: 'Katalog Curug' },
   { href: '/trips', label: 'Trip' },
   { href: '/artikel', label: 'Artikel' },
