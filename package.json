@@ -37,5 +37,8 @@
     "supabase": "^2.117.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "jsdom": "25.0.1"
   }
 }
