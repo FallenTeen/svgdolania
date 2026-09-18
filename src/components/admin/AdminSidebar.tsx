@@ -13,6 +13,7 @@ import {
   Menu,
   X,
   Droplets,
+  ExternalLink,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
@@ -27,6 +28,20 @@ const NAV_ITEMS = [
 function isActivePath(pathname: string, href: string, exact?: boolean) {
   if (exact) return pathname === href
   return pathname === href || pathname.startsWith(`${href}/`)
+}
+
+function Brand() {
+  return (
+    <div className="flex items-center gap-2.5 px-5 py-4">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-ink)] bg-[var(--color-primary)] text-white shadow-[var(--shadow-pop-sm)]">
+        <Droplets size={17} strokeWidth={2.5} />
+      </span>
+      <div className="leading-tight">
+        <p className="font-display text-sm font-extrabold text-[var(--color-ink)]">Explore Curug</p>
+        <p className="text-xs text-[var(--color-ink)]/50">Panel Admin</p>
+      </div>
+    </div>
+  )
 }
 
 function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
@@ -44,14 +59,8 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-2 border-b border-gray-200 px-5 py-4">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">
-          <Droplets size={16} strokeWidth={2.5} />
-        </span>
-        <div className="leading-tight">
-          <p className="text-sm font-semibold text-gray-900">Explore Curug</p>
-          <p className="text-xs text-gray-500">Panel Admin</p>
-        </div>
+      <div className="hidden border-b-2 border-[var(--color-ink)]/10 md:block">
+        <Brand />
       </div>
 
       <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-4">
@@ -63,27 +72,36 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
               key={item.href}
               href={item.href}
               onClick={onNavigate}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+              className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors ${
                 active
-                  ? 'bg-emerald-50 text-emerald-700'
-                  : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                  ? 'bg-[var(--color-primary)] text-white'
+                  : 'text-[var(--color-ink)]/70 hover:bg-[var(--color-primary-soft)] hover:text-[var(--color-ink)]'
               }`}
             >
-              <Icon size={18} strokeWidth={2} />
+              <Icon size={18} strokeWidth={2.25} />
               {item.label}
             </Link>
           )
         })}
       </nav>
 
-      <div className="border-t border-gray-200 px-3 py-4">
+      <div className="space-y-1 border-t-2 border-[var(--color-ink)]/10 px-3 py-4">
+        <a
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--color-ink)]/70 transition-colors hover:bg-[var(--color-primary-soft)] hover:text-[var(--color-ink)]"
+        >
+          <ExternalLink size={18} strokeWidth={2.25} />
+          Lihat situs publik
+        </a>
         <button
           type="button"
           onClick={handleLogout}
           disabled={loggingOut}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-red-50 hover:text-red-600 disabled:opacity-60"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--color-coral)] transition-colors hover:bg-[var(--color-coral-soft)] disabled:opacity-60"
         >
-          <LogOut size={18} strokeWidth={2} />
+          <LogOut size={18} strokeWidth={2.25} />
           {loggingOut ? 'Keluar...' : 'Logout'}
         </button>
       </div>
@@ -97,25 +115,25 @@ export function AdminSidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r border-gray-200 bg-white md:block">
+      <aside className="hidden w-64 shrink-0 border-r-2 border-[var(--color-ink)]/10 bg-[var(--color-card)] md:block">
         <div className="sticky top-0 h-screen">
           <SidebarContent />
         </div>
       </aside>
 
       {/* Mobile topbar */}
-      <div className="sticky top-0 z-30 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 md:hidden">
+      <div className="sticky top-0 z-30 flex items-center justify-between border-b-2 border-[var(--color-ink)]/10 bg-[var(--color-card)] px-4 py-3 md:hidden">
         <div className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">
-            <Droplets size={16} strokeWidth={2.5} />
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[var(--color-ink)] bg-[var(--color-primary)] text-white">
+            <Droplets size={15} strokeWidth={2.5} />
           </span>
-          <p className="text-sm font-semibold text-gray-900">Panel Admin</p>
+          <p className="font-display text-sm font-extrabold text-[var(--color-ink)]">Panel Admin</p>
         </div>
         <button
           type="button"
           onClick={() => setOpen(true)}
           aria-label="Buka menu"
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-300 text-gray-600"
+          className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[var(--color-ink)]/15 text-[var(--color-ink)]/70"
         >
           <Menu size={20} />
         </button>
@@ -125,17 +143,18 @@ export function AdminSidebar() {
       {open && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-[var(--color-ink)]/40"
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute inset-y-0 left-0 w-72 max-w-[85vw] bg-white shadow-xl">
-            <div className="flex items-center justify-end px-3 pt-3">
+          <div className="absolute inset-y-0 left-0 w-72 max-w-[85vw] border-r-2 border-[var(--color-ink)] bg-[var(--color-card)] shadow-[var(--shadow-pop-lg)]">
+            <div className="flex items-center justify-between border-b-2 border-[var(--color-ink)]/10">
+              <Brand />
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Tutup menu"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100"
+                className="mr-3 flex h-9 w-9 items-center justify-center rounded-full text-[var(--color-ink)]/50 hover:bg-black/5"
               >
                 <X size={20} />
               </button>

@@ -12,12 +12,16 @@ export default async function AdminOverviewPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
-        <p className="mt-1 text-sm text-gray-500">Ringkasan cepat kondisi katalog & trip kamu hari ini.</p>
+        <h1 className="font-display text-2xl font-extrabold text-[var(--color-ink)]">Dashboard</h1>
+        <p className="mt-1 text-sm text-[var(--color-ink)]/60">
+          Ringkasan cepat kondisi katalog & trip kamu hari ini.
+        </p>
       </div>
 
       {!result.success && (
-        <p className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">{result.error}</p>
+        <p className="mb-4 rounded-xl border-2 border-[var(--color-coral)] bg-[var(--color-coral-soft)] px-4 py-3 text-sm font-medium text-[#8a2e1b]">
+          {result.error}
+        </p>
       )}
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -66,13 +70,13 @@ function QuickLink({ href, title, description }: { href: string; title: string; 
   return (
     <Link
       href={href}
-      className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-4 transition-shadow hover:shadow-sm"
+      className="flex items-center justify-between rounded-2xl border-2 border-[var(--color-ink)]/15 bg-[var(--color-card)] p-4 transition-colors hover:border-[var(--color-ink)] hover:bg-[var(--color-primary-soft)]"
     >
       <div>
-        <p className="text-sm font-semibold text-gray-900">{title}</p>
-        <p className="mt-0.5 text-sm text-gray-500">{description}</p>
+        <p className="text-sm font-bold text-[var(--color-ink)]">{title}</p>
+        <p className="mt-0.5 text-sm text-[var(--color-ink)]/60">{description}</p>
       </div>
-      <ArrowRight size={18} className="shrink-0 text-gray-400" />
+      <ArrowRight size={18} className="shrink-0 text-[var(--color-ink)]/40" />
     </Link>
   )
 }
