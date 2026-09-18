@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowLeft, Check, X, ArrowUpCircle, Phone, Mail, Users } from 'lucide-react'
 import { getAllPendingParticipants, getTripsLite, getTripById } from './actions'
-import { getParticipantsByTrip, approveParticipant, rejectParticipant, promoteFromWaitlist } from '@/app/trips/[slug]/actions'
+import { getParticipantsByTrip, approveParticipant, rejectParticipant, promoteFromWaitlist } from '@/lib/actions/booking'
 import { TripFilterSelect } from '@/components/admin/TripFilterSelector'
 import { ParticipantMemberNames } from '@/components/admin/ParticipantMemberNames'
 import { ConfirmButton } from '@/components/admin/ConfirmButton'

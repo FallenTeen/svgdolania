@@ -13,8 +13,8 @@ import {
   Star,
 } from 'lucide-react'
 import { getCurugs } from '@/app/admin/curugs/actions'
-import { getTrips } from '@/app/trips/actions'
-import { getArticles } from '@/app/artikel/actions'
+import { getTrips } from '@/lib/actions/trips'
+import { getArticles } from '@/lib/actions/artikel'
 import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { CurugCard } from '@/components/curug/CurugCard'
 import { TripCard } from '@/components/trip/TripCard'

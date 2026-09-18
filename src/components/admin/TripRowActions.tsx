@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Pencil, Users, Trash2 } from 'lucide-react'
 import { ConfirmButton } from '@/components/admin/ConfirmButton'
-import { deleteTrip } from '@/app/trips/actions'
+import { deleteTrip } from '@/lib/actions/trips'
 
 export function TripRowActions({ id, title }: { id: string; title: string }) {
   return (

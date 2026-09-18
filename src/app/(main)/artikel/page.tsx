@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
-import { getArticles } from '@/app/artikel/actions'
+import { getArticles } from '@/lib/actions/artikel'
 import { ArticleCard } from '@/components/artikel/ArticleCard'
 
 export const metadata: Metadata = {

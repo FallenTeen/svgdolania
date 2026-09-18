@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Loader2, MessageCircle, Minus, Plus, ShieldCheck, PartyPopper } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
-import { submitBooking } from '@/app/trips/[slug]/actions'
+import { submitBooking } from '@/lib/actions/booking'
 import { Button } from '@/components/ui/Button'
 import type { TripWithCurugs } from '@/lib/types'
 

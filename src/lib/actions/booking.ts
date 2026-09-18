@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { createServiceClient } from '@/lib/supabase/service'
 import { createClient } from '@/lib/supabase/server'
-import { checkAndUpdateTripCapacity } from '@/app/trips/actions'
+import { checkAndUpdateTripCapacity } from '@/lib/actions/trips'
 import { generateAdminApprovalLink } from '@/lib/whatsapp'
 import type { ActionResult, Participant, Trip } from '@/lib/types'
 

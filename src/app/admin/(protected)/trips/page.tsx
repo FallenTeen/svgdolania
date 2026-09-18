@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Plus } from 'lucide-react'
-import { getTrips } from '@/app/trips/actions'
+import { getTrips } from '@/lib/actions/trips'
 import { TripListCalendar } from '@/components/admin/TripListCalendar'
 
 export default async function AdminTripsPage() {

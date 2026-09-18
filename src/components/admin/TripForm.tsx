@@ -3,7 +3,7 @@
 import { useMemo, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { Loader2, Save, Search, ExternalLink } from 'lucide-react'
-import { createTrip, updateTrip } from '@/app/trips/actions'
+import { createTrip, updateTrip } from '@/lib/actions/trips'
 import { uploadTripImage } from '@/app/admin/(protected)/trips/actions'
 import { ImageUploader } from '@/components/admin/ImageUploader'
 import { CopyButton } from '@/components/admin/CopyButton'

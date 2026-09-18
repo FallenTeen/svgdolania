@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import DOMPurify from 'isomorphic-dompurify'
-import { getArticleBySlug, getRelatedArticles } from '@/app/artikel/actions'
+import { getArticleBySlug, getRelatedArticles } from '@/lib/actions/artikel'
 import { ArticleCard } from '@/components/artikel/ArticleCard'
 import { formatDateLong } from '@/lib/format'
 
