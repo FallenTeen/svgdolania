@@ -1,69 +1,130 @@
-import Image from "next/image";
+import type { Metadata } from 'next'
+import { Compass, MapPin } from 'lucide-react'
+import { getCurugs } from '@/app/admin/curugs/actions'
+import { getTrips } from '@/app/admin/trips/actions'
+import { getArticles } from '@/app/artikel/actions'
+import { HeroCarousel } from '@/components/home/HeroCarousel'
+import { CurugCard } from '@/components/curug/CurugCard'
+import { TripCard } from '@/components/trip/TripCard'
+import { ArticleCard } from '@/components/artikel/ArticleCard'
+import { ButtonLink } from '@/components/ui/Button'
+import { SectionHeading, WaveDivider } from '@/components/ui/WaveDivider'
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'Explore Curug Banyumas — Katalog & Trip Air Terjun Banyumas',
+  description:
+    'Temukan curug terbaik di Banyumas dan gabung trip explore bareng rombongan. Dari yang santai buat keluarga sampai yang menantang buat pecinta trekking.',
+}
+
+export default async function HomePage() {
+  const [curugsResult, tripsResult, articlesResult] = await Promise.all([
+    getCurugs(),
+    getTrips({ status: 'open', type: 'public' }),
+    getArticles({ page: 1, perPage: 3 }),
+  ])
+
+  const featuredCurugs = (curugsResult.data ?? []).filter((c) => c.is_published).slice(0, 6)
+  const nearestTrips = (tripsResult.data ?? []).slice(0, 3)
+  const latestArticles = articlesResult.data?.articles ?? []
+
+  const heroImages = featuredCurugs
+    .filter((c) => c.cover_image_url)
+    .slice(0, 5)
+    .map((c) => ({ src: c.cover_image_url as string, alt: c.name }))
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div>
+      {/* Hero */}
+      <section className="relative flex min-h-[560px] items-end overflow-hidden border-b-2 border-[var(--color-ink)] sm:min-h-[620px]">
+        <HeroCarousel images={heroImages} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+
+        <div className="relative mx-auto w-full max-w-6xl px-4 pb-16 pt-24 sm:px-6 sm:pb-20">
+          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border-2 border-white/40 bg-white/10 px-3 py-1 text-sm font-bold text-white backdrop-blur">
+            <MapPin size={14} />
+            Kabupaten Banyumas, Jawa Tengah
+          </span>
+          <h1 className="max-w-2xl font-display text-4xl font-extrabold leading-[1.1] text-white drop-shadow sm:text-6xl">
+            Susuri curug tersembunyi di lereng Slamet
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-4 max-w-lg text-lg text-white/85">
+            Katalog curug lengkap dengan info akses & fasilitas, plus trip bareng rombongan biar
+            eksplorasi kamu makin seru dan nggak sendirian.
           </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <ButtonLink href="/curugs" variant="sun" size="lg">
+              <Compass size={18} />
+              Jelajahi Katalog Curug
+            </ButtonLink>
+            <ButtonLink href="/trips" variant="outline" size="lg">
+              Lihat Trip Terdekat
+            </ButtonLink>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+      </section>
+
+      {/* Curug Pilihan */}
+      <section className="bg-[var(--color-bg)] py-14 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <SectionHeading
+            eyebrow="Favorit pengunjung"
+            title="Curug Pilihan"
+            description="Beberapa curug paling sering direkomendasikan komunitas jalan-jalan lokal."
+            action={{ href: '/curugs', label: 'Lihat semua curug' }}
+          />
+          <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3">
+            {featuredCurugs.map((curug) => (
+              <CurugCard key={curug.id} curug={curug} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <WaveDivider color="var(--color-primary-soft)" />
+
+      {/* Trip Terdekat */}
+      <section className="bg-[var(--color-primary-soft)] py-14 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <SectionHeading
+            eyebrow="Ayo gabung"
+            title="Trip Terdekat"
+            description="Booking sekarang sebelum slotnya keburu penuh."
+            action={{ href: '/trips', label: 'Lihat semua trip' }}
+          />
+          {nearestTrips.length === 0 ? (
+            <p className="rounded-2xl border-2 border-dashed border-[var(--color-ink)]/20 bg-white/60 px-5 py-8 text-center text-[var(--color-ink)]/60">
+              Belum ada trip terbuka saat ini — cek lagi beberapa hari ke depan ya.
+            </p>
+          ) : (
+            <div className="grid gap-5 sm:grid-cols-3">
+              {nearestTrips.map((trip) => (
+                <TripCard key={trip.id} trip={trip} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <WaveDivider color="var(--color-bg)" flip />
+
+      {/* Artikel Terbaru */}
+      {latestArticles.length > 0 && (
+        <section className="bg-[var(--color-bg)] py-14 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <SectionHeading
+              eyebrow="Baca-baca dulu"
+              title="Artikel Terbaru"
+              description="Tips, panduan, dan cerita seputar explore curug."
+              action={{ href: '/artikel', label: 'Lihat semua artikel' }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <div className="grid gap-5 sm:grid-cols-3">
+              {latestArticles.map((article) => (
+                <ArticleCard key={article.id} article={article} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
-  );
+  )
 }

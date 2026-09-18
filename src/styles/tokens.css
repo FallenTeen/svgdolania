@@ -1,0 +1,119 @@
+/**
+ * Design tokens — "Trail-map & Stiker Outdoor"
+ * Tempel file ini, lalu tambahkan satu baris di paling atas src/app/globals.css:
+ *   @import '../styles/tokens.css';
+ *
+ * Kenapa begini: supaya semua warna/shadow konsisten di seluruh halaman publik
+ * tanpa harus utak-atik tailwind.config, cukup pakai CSS variable lewat
+ * arbitrary value Tailwind, contoh: bg-[var(--color-primary)]
+ */
+
+:root {
+  /* Base */
+  --color-bg: #fbf8ee;          /* kertas hangat, bukan cream template */
+  --color-bg-alt: #f3f7ee;      /* varian sedikit kehijauan untuk selang-seling section */
+  --color-ink: #142b1c;         /* nyaris hitam, condong hijau tua — bukan #000/#111 template */
+  --color-card: #ffffff;
+
+  /* Brand — hijau hutan sebagai warna utama */
+  --color-primary: #1e6b3d;
+  --color-primary-dark: #123f24;
+  --color-primary-soft: #e6f2e7;
+  --color-leaf: #4caf63;
+
+  /* Aksen playful */
+  --color-sun: #ffc246;         /* matahari sore */
+  --color-sun-soft: #fff1cf;
+  --color-coral: #ff6b4d;       /* sunset / urgensi ramah */
+  --color-coral-soft: #ffe3da;
+  --color-sky: #2aa9c4;         /* air / kolam */
+  --color-sky-soft: #dff2f5;
+  --color-whatsapp: #25d366;
+
+  /* Shadow "stiker" — offset solid, bukan soft grey blur */
+  --shadow-pop: 4px 4px 0px 0px var(--color-ink);
+  --shadow-pop-sm: 3px 3px 0px 0px var(--color-ink);
+  --shadow-pop-lg: 6px 6px 0px 0px var(--color-ink);
+}
+
+.font-display {
+  font-family: var(--font-display), 'Segoe UI', sans-serif;
+}
+.font-body {
+  font-family: var(--font-body), 'Segoe UI', sans-serif;
+}
+
+/* Border putus-putus ala peta jalur trekking, dipakai di chip filter & divider info */
+.trail-dashed {
+  background-image: linear-gradient(
+    to right,
+    var(--color-ink) 0%,
+    var(--color-ink) 50%,
+    transparent 50%
+  );
+  background-size: 10px 2px;
+  background-repeat: repeat-x;
+}
+
+/* Styling untuk content_html artikel (output Tiptap) — dipakai lewat class .article-content */
+.article-content {
+  font-size: 1.125rem;
+  line-height: 1.85;
+  color: var(--color-ink);
+}
+.article-content > * + * {
+  margin-top: 1.25em;
+}
+.article-content h2 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.6em;
+  font-weight: 800;
+  margin-top: 1.8em;
+}
+.article-content h3 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-top: 1.5em;
+}
+.article-content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-content ul,
+.article-content ol {
+  padding-left: 1.4em;
+}
+.article-content li + li {
+  margin-top: 0.4em;
+}
+.article-content ul {
+  list-style: disc;
+}
+.article-content ol {
+  list-style: decimal;
+}
+.article-content blockquote {
+  border-left: 4px solid var(--color-sun);
+  background: var(--color-sun-soft);
+  padding: 0.9em 1.2em;
+  border-radius: 0 1rem 1rem 0;
+  font-style: italic;
+}
+.article-content img {
+  border-radius: 1.25rem;
+  border: 2px solid var(--color-ink);
+  width: 100%;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

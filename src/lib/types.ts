@@ -84,6 +84,28 @@ export interface Profile {
   updated_at: string
 }
 
+// Artikel/blog CMS (Fase 4 — halaman publik; form create/edit CMS menyusul di Fase 5)
+export interface Article {
+  id: string
+  title: string
+  slug: string
+  excerpt: string | null
+  content_html: string | null
+  cover_image_url: string | null
+  is_published: boolean
+  published_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface PaginatedArticles {
+  articles: Article[]
+  total: number
+  page: number
+  perPage: number
+  totalPages: number
+}
+
 // Bentuk return standar semua Server Action, sesuai instruksi prompt 3.1.
 export interface ActionResult<T = undefined> {
   success: boolean
